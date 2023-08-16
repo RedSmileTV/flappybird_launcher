@@ -1,0 +1,18 @@
+body {
+  background-color: #292929;
+}
+
+#launch {
+  text-align: center;
+}
+
+#button {
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 10px 20px;
+  background: green;
+  font-size: 2em;
+  cursor: pointer;
+  position: relative;
+  top: 24rem;
+}
