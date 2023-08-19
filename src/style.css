@@ -2,17 +2,52 @@ body {
   background-color: #292929;
 }
 
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  width: 50%;
+}
+
+button {
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 5px 10px;
+  background: green;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.75;
+}
+
+nav {
+  left: 6em;
+}
+
+nav button {
+  
+  position: relative;
+}
+
+nav button a {
+  color: #000;
+  text-decoration: none;
+}
+
 #launch {
   text-align: center;
 }
 
-#button {
-  border-radius: 5px;
-  border: 1px solid #000;
+#launch-btn {
   padding: 10px 20px;
-  background: green;
-  font-size: 2em;
-  cursor: pointer;
-  position: relative;
-  top: 24rem;
+  margin-top: 2em;
 }
