@@ -32,6 +32,7 @@ fn launch(window: Window) {
 
             } else {
                 println!("Failed to launch FlappyBird.jar");
+                download();
             }
             show_window(window, true);
         }
@@ -40,6 +41,7 @@ fn launch(window: Window) {
         }
     }
 }
+
 fn show_window(window: Window, show: bool) {
     if show {
         window.show().expect("Failed to show window");
@@ -64,6 +66,21 @@ fn check_java() -> bool {
             false
         }
     }
+}
+
+fn download() {
+
+    let url = "https://github.com/MCmoderSD/FlappyBird/releases/download/2.6/FlappyBird.jar";
+
+    Command::new("cmd")
+        .arg("/c")
+        .arg("curl")
+        .arg("-LOJ")
+        .arg(url)
+        .output()
+        .expect("Failed to download FlappyBird.jar");
+
+    println!("FlappyBird.jar downloaded successfully");
 }
 
 fn main() {
