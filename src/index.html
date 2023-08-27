@@ -11,6 +11,7 @@
   <nav>
     <button class="play-btn"><a href="index.html">Play</a></button>
     <button class="leaderboard-btn"><a href="leaderboard.html">Leaderboard</a></button>
+    <button class="authors-btn"><a href="authors.html">Authors</a></button>
 
     <style>
       .play-btn a {
@@ -21,11 +22,13 @@
   </nav>
 
   <img src="/assets/screenshot.png" alt="">
-
+  
   <div id="launch">
+    <select id="version-select"></select>
     <button id="launch-btn">Launch</button>
   </div>
-  
-  <script src="main.js"></script>
+
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="/js/fetch.js"></script>
 </body>
 </html>
