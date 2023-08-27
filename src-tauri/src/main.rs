@@ -6,7 +6,7 @@ use tauri::Window;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-fn launch(window: Window) {
+fn launch(window: Window, version: String) {
 
     if !check_java() {
         Command::new("cmd")
@@ -21,7 +21,7 @@ fn launch(window: Window) {
     show_window(window.clone(), false);
     let launching = Command::new("javaw")
         .arg("-jar")
-        .arg("FlappyBird.jar")
+        .arg("FlappyBird-".to_owned() + &version + ".jar")
         .output();
 
     match launching {
@@ -32,7 +32,7 @@ fn launch(window: Window) {
 
             } else {
                 println!("Failed to launch FlappyBird.jar");
-                download();
+                download(version);
             }
             show_window(window, true);
         }
@@ -68,15 +68,17 @@ fn check_java() -> bool {
     }
 }
 
-fn download() {
+fn download(version: String) {
 
-    let url = "https://github.com/MCmoderSD/FlappyBird/releases/download/2.6/FlappyBird.jar";
+    let url: String = "https://github.com/MCmoderSD/FlappyBird/releases/download/".to_owned() + &version + "/FlappyBird.jar";
 
     Command::new("cmd")
         .arg("/c")
         .arg("curl")
-        .arg("-LOJ")
+        .arg("-L")
         .arg(url)
+        .arg("-o")
+        .arg("FlappyBird-".to_owned() + &version +".jar")
         .output()
         .expect("Failed to download FlappyBird.jar");
 
