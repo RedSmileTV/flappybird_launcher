@@ -8,10 +8,10 @@ body::-webkit-scrollbar {
 
 * {
   user-select: none;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1, h2, h4 {
-  font-family: Arial, Helvetica, sans-serif;
   color: white;
   text-align: center;
 }
@@ -21,7 +21,6 @@ h4 {
 }
 
 a {
-  font-family: Arial, Helvetica, sans-serif;
   color: white;
 }
 
@@ -33,13 +32,17 @@ img {
   width: 50%;
 }
 
-button {
+button, select, option {
   border-radius: 5px;
   border: 1px solid #000;
   padding: 5px 10px;
   background: green;
-  font-size: 2em;
+  font-size: 2rem;
   cursor: pointer;
+}
+
+select, option {
+  font-size: 1.9rem;
 }
 
 button:hover {
@@ -64,28 +67,39 @@ nav button a {
 }
 
 #launch {
-  margin-left: 6rem;
+  text-align: center;
+  justify-content: space-evenly;
 }
 
-#launch-btn {
+#launch button {
   padding: 10px 20px;
-  margin-top: 2rem;
+  margin-left: 3rem;
+}
+
+#loading-bar {
+  text-align: center;
+  background-color: green;
+  border: #000 1.5px solid;
+  height: 1rem;
+  position: relative;
+  margin-top: 1rem;
+  visibility: hidden;
 }
 
 #version-select {
   padding: 10px 20px;
   position: relative;
-  font-size: 1.5rem;
-  border: 1px solid #000;
   color: white;
-  background-color: green;
-  border-radius: 5px;
-  margin-right: 6.8rem;
 }
 
 #version-select option {
   background-color: green;
   color: black;
+}
+
+#options-btn {
+  padding: 10px 20px;
+  margin-top: 2rem;
 }
 
 #flappybird, #flappybird-launcher {

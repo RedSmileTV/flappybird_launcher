@@ -6,8 +6,7 @@ use tauri::Window;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-fn launch(window: Window, version: String) {
-
+async fn launch(window: Window, version: String) {
     if !check_java() {
         Command::new("cmd")
             .arg("/c")
@@ -18,7 +17,15 @@ fn launch(window: Window, version: String) {
         return;
     }
 
+    // TODO while downloading send frontend to make a loading bar
+
+    if !file_checker(version.clone()) {
+        download(version.clone()).await;
+        // TODO send frontend to make a loading bar
+    }
+
     show_window(window.clone(), false);
+
     let launching = Command::new("javaw")
         .arg("-jar")
         .arg("FlappyBird-".to_owned() + &version + ".jar")
@@ -29,10 +36,8 @@ fn launch(window: Window, version: String) {
             // Check the exit status
             if launching.status.success() {
                 println!("FlappyBird.jar launched successfully");
-
             } else {
                 println!("Failed to launch FlappyBird.jar");
-                download(version);
             }
             show_window(window, true);
         }
@@ -48,6 +53,23 @@ fn show_window(window: Window, show: bool) {
     }
     else {
         window.hide().expect("Failed to hide window");
+    }
+}
+
+fn file_checker(version: String) -> bool {
+    // Getting current directory
+    let current_dir = std::env::current_dir().unwrap();
+    // Creating file path
+    let file_name = "FlappyBird-".to_owned() + &version + ".jar";
+    let file_path = current_dir.join(file_name);
+
+    if file_path.exists() {
+        println!("FlappyBird.jar already exists");
+        true
+    }
+    else {
+        println!("FlappyBird.jar does not exist");
+        false
     }
 }
 
@@ -68,13 +90,10 @@ fn check_java() -> bool {
     }
 }
 
-fn download(version: String) {
-
+async fn download(version: String) {
     let url: String = "https://github.com/MCmoderSD/FlappyBird/releases/download/".to_owned() + &version + "/FlappyBird.jar";
 
-    Command::new("cmd")
-        .arg("/c")
-        .arg("curl")
+    Command::new("curl")
         .arg("-L")
         .arg(url)
         .arg("-o")
