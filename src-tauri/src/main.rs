@@ -1,6 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::ops::Add;
 use std::process::Command;
 use tauri::Window;
 
@@ -91,13 +92,17 @@ fn check_java() -> bool {
 }
 
 async fn download(version: String) {
-    let url: String = "https://github.com/MCmoderSD/FlappyBird/releases/download/".to_owned() + &version + "/FlappyBird.jar";
+    let url: String = "https://github.com/MCmoderSD/FlappyBird/releases/download/".to_owned() + &version;
+
+    let version_as_int: f32 = version.parse().unwrap();
+
+    let url: String = if version_as_int >= 3.0 { url.add("/FlappyBird-asset-streaming.jar") } else { url.add("/FlappyBird.jar") };
 
     Command::new("curl")
         .arg("-L")
         .arg(url)
         .arg("-o")
-        .arg("FlappyBird-".to_owned() + &version +".jar")
+        .arg("FlappyBird-".to_owned() + &version + ".jar")
         .output()
         .expect("Failed to download FlappyBird.jar");
 
