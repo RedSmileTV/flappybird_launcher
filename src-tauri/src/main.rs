@@ -94,9 +94,9 @@ fn check_java() -> bool {
 async fn download(version: String) {
     let url: String = "https://github.com/MCmoderSD/FlappyBird/releases/download/".to_owned() + &version;
 
-    let version_as_int: f32 = version.parse().unwrap();
+    let version_as_num: f32 = version.parse().unwrap();
 
-    let url: String = if version_as_int >= 3.0 { url.add("/FlappyBird-asset-streaming.jar") } else { url.add("/FlappyBird.jar") };
+    let url: String = if version_as_num >= 3.0 { url.add("/FlappyBird-asset-streaming.jar") } else { url.add("/FlappyBird.jar") };
 
     Command::new("curl")
         .arg("-L")
